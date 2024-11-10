@@ -48,5 +48,7 @@ func main() {
 		AllowedMethods: []string{"GET"},
 		AllowedHeaders: []string{"*"},
 	}).Handler(mux)
+
+	fmt.Println("Listening on " + PORT)
 	log.Fatal(http.ListenAndServe(PORT, handler))
 }
