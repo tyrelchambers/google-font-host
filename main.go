@@ -43,11 +43,7 @@ func main() {
 		w.Write(font)
 	})
 
-	handler := cors.New(cors.Options{
-		AllowedOrigins: []string{"http://localhost:3001", "https://utiliteehee.com"},
-		AllowedMethods: []string{"GET"},
-		AllowedHeaders: []string{"*"},
-	}).Handler(mux)
+	handler := cors.Default().Handler(mux)
 
 	fmt.Println("Listening on " + PORT)
 	log.Fatal(http.ListenAndServe(PORT, handler))
