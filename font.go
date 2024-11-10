@@ -40,7 +40,7 @@ func (f *FontServiceImpl) SetFonts(fonts []string) {
 
 func (f *FontServiceImpl) Download(fontName string) error {
 	fmt.Println("Downloading font from Google", fontName)
-	authtoken := "IzaSyDowpwb2Kg_riAn97y7Rcg9LqmxFSEr1SI"
+	authtoken := "AIzaSyDowpwb2Kg_riAn97y7Rcg9LqmxFSEr1SI"
 
 	if authtoken == "" {
 		return fmt.Errorf("missing auth token")
@@ -52,6 +52,7 @@ func (f *FontServiceImpl) Download(fontName string) error {
 	resp, err := http.Get(url)
 
 	if err != nil {
+		fmt.Println(err)
 		return err
 	}
 
@@ -60,6 +61,7 @@ func (f *FontServiceImpl) Download(fontName string) error {
 	body, err := io.ReadAll(resp.Body)
 
 	if err != nil {
+		fmt.Println(err)
 		return err
 	}
 

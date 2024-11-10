@@ -11,7 +11,7 @@ COPY . ./
 
 RUN CGO_ENABLED=0 GOOS=linux go build -o /app/main
 
-FROM scratch AS final
+FROM alpine AS final
 
 EXPOSE 8080
 COPY --from=build /app/main /app/main

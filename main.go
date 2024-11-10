@@ -18,6 +18,10 @@ func main() {
 		PORT = ":" + os.Getenv("PORT")
 	}
 
+	if _, err := os.Stat("./fonts"); os.IsNotExist(err) {
+		os.Mkdir("./fonts", 0755)
+	}
+
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		query := r.URL.Query()
 		fontName := query.Get("fontName")
