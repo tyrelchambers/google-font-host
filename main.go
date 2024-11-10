@@ -28,6 +28,11 @@ func main() {
 
 		fmt.Println("Looking for font ", fontName, weight, variant)
 
+		if fontName == "" {
+			http.Error(w, "Missing font name", 400)
+			return
+		}
+
 		font, err := fontService.GetFont(fontName, weight, variant)
 
 		if err != nil {
@@ -38,6 +43,10 @@ func main() {
 		w.Write(font)
 	})
 
-	handler := cors.Default().Handler(mux)
+	handler := cors.New(cors.Options{
+		AllowedOrigins: []string{"http://localhost:3001", "https://utiliteehee.com"},
+		AllowedMethods: []string{"GET"},
+		AllowedHeaders: []string{"*"},
+	}).Handler(mux)
 	log.Fatal(http.ListenAndServe(PORT, handler))
 }
